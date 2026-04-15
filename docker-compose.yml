@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  api:
+    build: ./api
+    container_name: task-tracker-api
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URL=mongodb://mongo:27017/tasktracker
+      - PORT=5000
+    depends_on:
+      - mongo
+
+  client:
+    build: ./client
+    container_name: task-tracker-client
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:5000
+    depends_on:
+      - api
+
+  mongo:
+    image: mongo:7
+    container_name: task-tracker-mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
