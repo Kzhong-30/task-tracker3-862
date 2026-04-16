@@ -3,11 +3,19 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "jest --forceExit",
+    "test:report": "jest --forceExit --reporters=default --reporters=jest-junit"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.21.0",
     "mongoose": "^8.8.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-junit": "^16.0.0",
+    "mongodb-memory-server": "^9.1.6",
+    "supertest": "^6.3.3"
   }
 }
